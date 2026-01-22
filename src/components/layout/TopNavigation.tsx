@@ -2,6 +2,7 @@ import { useAssessment } from '../../contexts/AssessmentContext';
 import { calculateProgress } from '../../utils/assessment';
 import frameworkData from '../../data/framework.json';
 import { Button } from '../common/Button';
+import aviatrixLogo from '../../assets/aviatrix.png';
 
 interface TopNavigationProps {
   onLoad: () => void;
@@ -32,7 +33,7 @@ export function TopNavigation({ onLoad, onSave, onToggleMobileMenu }: TopNavigat
           {/* Logo + Title (responsive) */}
           <div className="flex items-center space-x-3 min-w-0">
             <img
-              src="/aviatrix.png"
+              src={aviatrixLogo}
               alt="Aviatrix Logo"
               className="w-8 h-8 md:w-10 md:h-10 object-contain flex-shrink-0"
             />
