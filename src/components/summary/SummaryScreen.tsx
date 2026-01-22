@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAssessment } from '../../contexts/AssessmentContext';
 import { calculateProgress } from '../../utils/assessment';
 import frameworkData from '../../data/framework.json';
@@ -20,22 +20,27 @@ export function SummaryScreen() {
   );
 
   // Update form when overall assessment changes (e.g., after loading a file)
-  React.useEffect(() => {
+  useEffect(() => {
     setNarrative(state.assessment.overallAssessment.narrative || '');
     setStrengths(state.assessment.overallAssessment.keyStrengths.join('\n') || '');
     setGaps(state.assessment.overallAssessment.keyGaps.join('\n') || '');
   }, [state.assessment.overallAssessment]);
 
-  const handleSave = () => {
-    dispatch({
-      type: 'UPDATE_OVERALL_ASSESSMENT',
-      payload: {
-        narrative,
-        keyStrengths: strengths.split('\n').filter(s => s.trim()),
-        keyGaps: gaps.split('\n').filter(g => g.trim()),
-      },
-    });
-  };
+  // Auto-save narrative, strengths, and gaps with debounce
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch({
+        type: 'UPDATE_OVERALL_ASSESSMENT',
+        payload: {
+          narrative,
+          keyStrengths: strengths.split('\n').filter(s => s.trim()),
+          keyGaps: gaps.split('\n').filter(g => g.trim()),
+        },
+      });
+    }, 500); // 500ms debounce
+
+    return () => clearTimeout(timer);
+  }, [narrative, strengths, gaps, dispatch]);
 
   // Convert maturity level to numeric score (1-4)
   const getMaturityScore = (level: MaturityLevel | null): number | null => {
@@ -354,12 +359,9 @@ export function SummaryScreen() {
           ← Back to Assessment
         </Button>
 
-        <Button
-          variant="primary"
-          onClick={handleSave}
-        >
-          Save Summary
-        </Button>
+        <div className="text-sm text-gray-500 italic">
+          Summary auto-saves as you type
+        </div>
       </div>
     </div>
   );
