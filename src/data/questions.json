@@ -1,0 +1,476 @@
+{
+  "schemaVersion": "1.0",
+  "questions": {
+    "networks": {
+      "segmentationStrategy": [
+        {
+          "id": "net-seg-1",
+          "question": "How do you currently segment network traffic between workloads in your cloud environment?",
+          "purpose": "Understand current segmentation approach"
+        },
+        {
+          "id": "net-seg-2",
+          "question": "Can workloads in different tiers (web, app, database) communicate freely, or are there controls in place?",
+          "purpose": "Assess east-west traffic controls"
+        },
+        {
+          "id": "net-seg-3",
+          "question": "Do you use tags, labels, or other identity constructs to define segmentation policies?",
+          "purpose": "Evaluate identity-aware segmentation"
+        },
+        {
+          "id": "net-seg-4",
+          "question": "How automated is your segmentation policy enforcement? Manual, scripted, or fully automated?",
+          "purpose": "Assess automation maturity"
+        },
+        {
+          "id": "net-seg-5",
+          "question": "Do you have different segmentation strategies across cloud providers, or is it consistent?",
+          "purpose": "Understand multi-cloud consistency"
+        }
+      ],
+      "policyEnforcement": [
+        {
+          "id": "net-pol-1",
+          "question": "How are your network security policies defined? Manually in the cloud console, via IaC, or through a centralized platform?",
+          "purpose": "Assess policy management approach"
+        },
+        {
+          "id": "net-pol-2",
+          "question": "When a new application is deployed, how quickly can you apply appropriate network policies?",
+          "purpose": "Evaluate policy agility"
+        },
+        {
+          "id": "net-pol-3",
+          "question": "Do your policies follow workloads as they move or scale across environments?",
+          "purpose": "Assess dynamic policy capability"
+        },
+        {
+          "id": "net-pol-4",
+          "question": "How do you validate that network policies are being enforced correctly?",
+          "purpose": "Understand enforcement verification"
+        },
+        {
+          "id": "net-pol-5",
+          "question": "Can you enforce policies at the individual workload level, or only at the subnet/VPC level?",
+          "purpose": "Assess granularity of enforcement"
+        }
+      ],
+      "visibility": [
+        {
+          "id": "net-vis-1",
+          "question": "What visibility do you have into network traffic flowing between your workloads?",
+          "purpose": "Understand current observability"
+        },
+        {
+          "id": "net-vis-2",
+          "question": "Can you see which services are communicating with each other in real-time?",
+          "purpose": "Assess real-time visibility"
+        },
+        {
+          "id": "net-vis-3",
+          "question": "How do you detect anomalous or unauthorized connections between workloads?",
+          "purpose": "Evaluate threat detection capability"
+        },
+        {
+          "id": "net-vis-4",
+          "question": "Do you have visibility into traffic crossing cloud boundaries or going to on-premises?",
+          "purpose": "Assess cross-environment visibility"
+        },
+        {
+          "id": "net-vis-5",
+          "question": "How long does it take to troubleshoot a network connectivity issue between services?",
+          "purpose": "Understand operational efficiency"
+        }
+      ],
+      "encryption": [
+        {
+          "id": "net-enc-1",
+          "question": "What percentage of your east-west traffic (between workloads) is encrypted?",
+          "purpose": "Assess encryption coverage"
+        },
+        {
+          "id": "net-enc-2",
+          "question": "How do you manage TLS certificates for your services? Manual, automated, or service mesh?",
+          "purpose": "Evaluate certificate management"
+        },
+        {
+          "id": "net-enc-3",
+          "question": "Do you use mutual TLS (mTLS) for service-to-service authentication?",
+          "purpose": "Assess authentication strength"
+        },
+        {
+          "id": "net-enc-4",
+          "question": "Can you inspect encrypted traffic for security threats without decryption?",
+          "purpose": "Understand visibility into encrypted traffic"
+        },
+        {
+          "id": "net-enc-5",
+          "question": "Are connections to your databases and sensitive data stores always encrypted?",
+          "purpose": "Assess data-in-transit protection"
+        }
+      ],
+      "multiCloudConnectivity": [
+        {
+          "id": "net-mc-1",
+          "question": "Do you have workloads running in multiple cloud providers? Which ones?",
+          "purpose": "Understand multi-cloud footprint"
+        },
+        {
+          "id": "net-mc-2",
+          "question": "How do workloads in different clouds communicate with each other?",
+          "purpose": "Assess inter-cloud connectivity"
+        },
+        {
+          "id": "net-mc-3",
+          "question": "Are security policies consistent across all your cloud environments?",
+          "purpose": "Evaluate policy consistency"
+        },
+        {
+          "id": "net-mc-4",
+          "question": "Can you failover workloads from one cloud to another? How long does it take?",
+          "purpose": "Assess business continuity capability"
+        },
+        {
+          "id": "net-mc-5",
+          "question": "Do you manage each cloud separately, or do you have a unified control plane?",
+          "purpose": "Understand operational model"
+        }
+      ],
+      "hybridConnectivity": [
+        {
+          "id": "net-hyb-1",
+          "question": "How are your cloud environments connected to your on-premises data center?",
+          "purpose": "Understand hybrid connectivity"
+        },
+        {
+          "id": "net-hyb-2",
+          "question": "Is traffic between cloud and on-premises encrypted? Always, sometimes, or never?",
+          "purpose": "Assess hybrid security"
+        },
+        {
+          "id": "net-hyb-3",
+          "question": "Do you have different security policies for hybrid traffic versus cloud-native traffic?",
+          "purpose": "Evaluate policy consistency"
+        },
+        {
+          "id": "net-hyb-4",
+          "question": "How do you handle disaster recovery between cloud and on-premises?",
+          "purpose": "Assess resilience"
+        },
+        {
+          "id": "net-hyb-5",
+          "question": "Can your on-premises applications seamlessly access cloud services?",
+          "purpose": "Understand integration maturity"
+        }
+      ]
+    },
+    "applicationsWorkloads": {
+      "workloadIdentity": [
+        {
+          "id": "app-id-1",
+          "question": "How do your applications authenticate to each other? API keys, service accounts, or certificates?",
+          "purpose": "Understand authentication methods"
+        },
+        {
+          "id": "app-id-2",
+          "question": "Does each microservice or container have its own unique identity?",
+          "purpose": "Assess identity granularity"
+        },
+        {
+          "id": "app-id-3",
+          "question": "How do you rotate or revoke credentials for your services?",
+          "purpose": "Evaluate credential management"
+        },
+        {
+          "id": "app-id-4",
+          "question": "Can you enforce that only authorized services can access specific APIs or resources?",
+          "purpose": "Assess authorization capability"
+        },
+        {
+          "id": "app-id-5",
+          "question": "Do you use a service mesh or similar solution for service identity?",
+          "purpose": "Understand platform maturity"
+        }
+      ],
+      "applicationSegmentation": [
+        {
+          "id": "app-seg-1",
+          "question": "Can any service in your environment talk to any other service, or are there restrictions?",
+          "purpose": "Assess segmentation maturity"
+        },
+        {
+          "id": "app-seg-2",
+          "question": "How do you prevent lateral movement between compromised services?",
+          "purpose": "Evaluate threat containment"
+        },
+        {
+          "id": "app-seg-3",
+          "question": "Are your applications segmented by function, sensitivity, or compliance requirements?",
+          "purpose": "Understand segmentation strategy"
+        },
+        {
+          "id": "app-seg-4",
+          "question": "Can you enforce Zero Trust principles between application components?",
+          "purpose": "Assess Zero Trust implementation"
+        },
+        {
+          "id": "app-seg-5",
+          "question": "How do you handle segmentation for third-party or partner services?",
+          "purpose": "Evaluate external service controls"
+        }
+      ],
+      "apiSecurity": [
+        {
+          "id": "app-api-1",
+          "question": "How do you secure your APIs? Authentication, authorization, rate limiting?",
+          "purpose": "Assess API security controls"
+        },
+        {
+          "id": "app-api-2",
+          "question": "Do you have visibility into all API calls happening in your environment?",
+          "purpose": "Understand API observability"
+        },
+        {
+          "id": "app-api-3",
+          "question": "How do you detect and prevent API abuse or attacks?",
+          "purpose": "Evaluate threat protection"
+        },
+        {
+          "id": "app-api-4",
+          "question": "Are all your APIs documented and inventoried, including shadow APIs?",
+          "purpose": "Assess API governance"
+        },
+        {
+          "id": "app-api-5",
+          "question": "Do you use an API gateway? What capabilities does it provide?",
+          "purpose": "Understand API management platform"
+        }
+      ]
+    },
+    "data": {
+      "dataEncryption": [
+        {
+          "id": "data-enc-1",
+          "question": "What percentage of your data at rest is encrypted?",
+          "purpose": "Assess encryption coverage"
+        },
+        {
+          "id": "data-enc-2",
+          "question": "How do you manage encryption keys? Cloud provider KMS, HSM, or third-party?",
+          "purpose": "Understand key management approach"
+        },
+        {
+          "id": "data-enc-3",
+          "question": "Are encryption keys rotated regularly? Automatically or manually?",
+          "purpose": "Evaluate key lifecycle management"
+        },
+        {
+          "id": "data-enc-4",
+          "question": "Can you prove that specific data has always been encrypted?",
+          "purpose": "Assess audit capability"
+        },
+        {
+          "id": "data-enc-5",
+          "question": "Do you encrypt data in transit between all services, or only at the perimeter?",
+          "purpose": "Understand end-to-end encryption"
+        }
+      ],
+      "dataGovernance": [
+        {
+          "id": "data-gov-1",
+          "question": "Do you know where all your sensitive data resides across your cloud environments?",
+          "purpose": "Assess data discovery"
+        },
+        {
+          "id": "data-gov-2",
+          "question": "How do you classify data (public, internal, confidential, restricted)?",
+          "purpose": "Understand classification maturity"
+        },
+        {
+          "id": "data-gov-3",
+          "question": "Can you track data lineage - where data came from and where it's going?",
+          "purpose": "Evaluate data tracking capability"
+        },
+        {
+          "id": "data-gov-4",
+          "question": "How do you enforce data residency requirements (e.g., GDPR, data sovereignty)?",
+          "purpose": "Assess compliance capability"
+        },
+        {
+          "id": "data-gov-5",
+          "question": "Do you have data loss prevention (DLP) controls in place?",
+          "purpose": "Understand DLP maturity"
+        }
+      ],
+      "dataAccess": [
+        {
+          "id": "data-acc-1",
+          "question": "How do you control who can access sensitive data? RBAC, ABAC, or manual?",
+          "purpose": "Assess access control model"
+        },
+        {
+          "id": "data-acc-2",
+          "question": "Do you grant standing access or just-in-time access to sensitive data?",
+          "purpose": "Evaluate privileged access management"
+        },
+        {
+          "id": "data-acc-3",
+          "question": "How often do you review and certify access to critical data?",
+          "purpose": "Understand access governance"
+        },
+        {
+          "id": "data-acc-4",
+          "question": "Can you detect unauthorized access or anomalous data access patterns?",
+          "purpose": "Assess threat detection"
+        },
+        {
+          "id": "data-acc-5",
+          "question": "Do you have a complete audit trail of who accessed what data and when?",
+          "purpose": "Evaluate audit capability"
+        }
+      ]
+    },
+    "crossCutting": {
+      "automation": [
+        {
+          "id": "cross-auto-1",
+          "question": "What percentage of your infrastructure is defined as code?",
+          "purpose": "Assess IaC adoption"
+        },
+        {
+          "id": "cross-auto-2",
+          "question": "How are security policies deployed? Manually, via scripts, or fully automated?",
+          "purpose": "Evaluate policy automation"
+        },
+        {
+          "id": "cross-auto-3",
+          "question": "Do you have CI/CD pipelines that include security checks?",
+          "purpose": "Understand DevSecOps maturity"
+        },
+        {
+          "id": "cross-auto-4",
+          "question": "Can you automatically remediate security issues, or is it a manual process?",
+          "purpose": "Assess automated remediation"
+        },
+        {
+          "id": "cross-auto-5",
+          "question": "How long does it take to deploy a security policy change across all environments?",
+          "purpose": "Evaluate operational agility"
+        }
+      ],
+      "observability": [
+        {
+          "id": "cross-obs-1",
+          "question": "Do you have a centralized SIEM or logging platform?",
+          "purpose": "Understand observability platform"
+        },
+        {
+          "id": "cross-obs-2",
+          "question": "Can you correlate security events across network, application, and data layers?",
+          "purpose": "Assess correlation capability"
+        },
+        {
+          "id": "cross-obs-3",
+          "question": "How quickly can you detect a security incident? Minutes, hours, or days?",
+          "purpose": "Evaluate detection speed"
+        },
+        {
+          "id": "cross-obs-4",
+          "question": "Do you have dashboards that show your security posture in real-time?",
+          "purpose": "Assess visibility maturity"
+        },
+        {
+          "id": "cross-obs-5",
+          "question": "Can you generate compliance reports automatically, or is it a manual process?",
+          "purpose": "Understand compliance automation"
+        }
+      ],
+      "teamCollaboration": [
+        {
+          "id": "cross-team-1",
+          "question": "How do your security, network, and platform teams coordinate on security initiatives?",
+          "purpose": "Assess team collaboration"
+        },
+        {
+          "id": "cross-team-2",
+          "question": "Do teams use shared tools and dashboards, or separate systems?",
+          "purpose": "Understand tool consolidation"
+        },
+        {
+          "id": "cross-team-3",
+          "question": "How long does it take to resolve an incident that spans multiple teams?",
+          "purpose": "Evaluate collaboration efficiency"
+        },
+        {
+          "id": "cross-team-4",
+          "question": "Is there a clear ownership model for security across your organization?",
+          "purpose": "Assess governance maturity"
+        },
+        {
+          "id": "cross-team-5",
+          "question": "Do you practice DevSecOps with security embedded in development workflows?",
+          "purpose": "Understand DevSecOps adoption"
+        }
+      ]
+    }
+  },
+  "listeningGuidance": {
+    "networks": {
+      "segmentationStrategy": {
+        "traditional": "Keywords: 'flat network', 'everything in one VPC', 'no restrictions'",
+        "initial": "Keywords: 'security groups', 'subnet isolation', 'tier-based'",
+        "advanced": "Keywords: 'tags', 'labels', 'some automation', 'policy granularity'",
+        "optimal": "Keywords: 'microsegmentation', 'fully automated', 'identity-driven'"
+      },
+      "policyEnforcement": {
+        "traditional": "Keywords: 'manual', 'firewall rules', 'console changes'",
+        "initial": "Keywords: 'IaC starting', 'basic automation', 'terraform'",
+        "advanced": "Keywords: 'API-driven', 'real-time', 'tag-based enforcement'",
+        "optimal": "Keywords: 'fully automated', 'policy follows workload', 'telemetry-driven'"
+      }
+    },
+    "applicationsWorkloads": {
+      "workloadIdentity": {
+        "traditional": "Keywords: 'IP-based', 'shared credentials', 'no service identity'",
+        "initial": "Keywords: 'service accounts', 'basic IAM', 'per-app credentials'",
+        "advanced": "Keywords: 'service mesh', 'API gateway', 'tag-based identity'",
+        "optimal": "Keywords: 'mTLS', 'SPIFFE', 'cryptographic identity', 'automated'"
+      },
+      "applicationSegmentation": {
+        "traditional": "Keywords: 'all services can talk', 'no segmentation', 'flat'",
+        "initial": "Keywords: 'tier isolation', 'security groups per service'",
+        "advanced": "Keywords: 'service mesh', 'API-level controls', 'dynamic policy'",
+        "optimal": "Keywords: 'zero trust', 'microsegmentation', 'automated enforcement'"
+      }
+    },
+    "data": {
+      "dataEncryption": {
+        "traditional": "Keywords: 'not encrypted', 'inconsistent', 'manual keys'",
+        "initial": "Keywords: 'KMS', 'encrypted at rest', 'basic coverage'",
+        "advanced": "Keywords: 'consistent encryption', 'automated keys', 'audit trails'",
+        "optimal": "Keywords: 'end-to-end', 'full visibility', 'automated rotation'"
+      },
+      "dataGovernance": {
+        "traditional": "Keywords: 'no idea', 'no tracking', 'no classification'",
+        "initial": "Keywords: 'basic classification', 'manual discovery'",
+        "advanced": "Keywords: 'automated discovery', 'policy-based', 'data lineage'",
+        "optimal": "Keywords: 'real-time visibility', 'automated governance', 'full audit'"
+      }
+    },
+    "crossCutting": {
+      "automation": {
+        "traditional": "Keywords: 'manual', 'no IaC', 'click-ops', 'independent teams'",
+        "initial": "Keywords: 'starting IaC', 'some scripts', 'fragmented'",
+        "advanced": "Keywords: 'IaC integrated', 'CI/CD with security', 'partial automation'",
+        "optimal": "Keywords: 'fully automated', 'unified platform', 'shared control plane'"
+      },
+      "observability": {
+        "traditional": "Keywords: 'no monitoring', 'reactive', 'manual logs'",
+        "initial": "Keywords: 'fragmented tools', 'multiple SIEMs', 'siloed'",
+        "advanced": "Keywords: 'centralized SIEM', 'automated alerts', 'correlation'",
+        "optimal": "Keywords: 'real-time telemetry', 'automated response', 'audit-ready'"
+      }
+    }
+  }
+}

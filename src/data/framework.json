@@ -1,0 +1,746 @@
+{
+  "schemaVersion": "1.0",
+  "pillars": {
+    "networks": {
+      "id": "networks",
+      "name": "Networks",
+      "description": "Cloud network security and segmentation",
+      "icon": "🌐",
+      "cloudSpecific": true,
+      "dimensions": {
+        "segmentationStrategy": {
+          "id": "segmentationStrategy",
+          "name": "Segmentation Strategy",
+          "description": "How network traffic is segmented and controlled between workloads",
+          "maturityLevels": {
+            "traditional": {
+              "level": "traditional",
+              "name": "Traditional",
+              "description": "North-south focus with broad trust zones",
+              "indicators": [
+                "No segmentation between cloud regions or workloads",
+                "Workloads communicate freely within VPC",
+                "Perimeter-focused security model"
+              ]
+            },
+            "initial": {
+              "level": "initial",
+              "name": "Initial",
+              "description": "Basic controls via security groups or cloud firewalls",
+              "indicators": [
+                "East-west flows still largely unsegmented",
+                "Some network policy enforcement at tier level",
+                "Security groups provide basic boundaries"
+              ]
+            },
+            "advanced": {
+              "level": "advanced",
+              "name": "Advanced",
+              "description": "Multi-cloud segmentation with policy granularity",
+              "indicators": [
+                "Policy granularity by tag, region, or account",
+                "Partial automation of enforcement",
+                "Consistent segmentation across environments"
+              ]
+            },
+            "optimal": {
+              "level": "optimal",
+              "name": "Optimal",
+              "description": "Inline, automated policy enforcement with microsegmentation",
+              "indicators": [
+                "Microsegmentation across clouds, regions, and hybrid paths",
+                "Full encryption of east-west traffic",
+                "Automated, telemetry-driven policy"
+              ]
+            }
+          }
+        },
+        "policyEnforcement": {
+          "id": "policyEnforcement",
+          "name": "Policy Enforcement",
+          "description": "How network policies are defined and enforced",
+          "maturityLevels": {
+            "traditional": {
+              "level": "traditional",
+              "name": "Traditional",
+              "description": "Manual, perimeter-based enforcement",
+              "indicators": [
+                "Firewall rules managed manually",
+                "No centralized policy management",
+                "Reactive rather than proactive controls"
+              ]
+            },
+            "initial": {
+              "level": "initial",
+              "name": "Initial",
+              "description": "Basic automated enforcement begins",
+              "indicators": [
+                "Policies applied to application tiers",
+                "Some infrastructure-as-code adoption",
+                "Limited real-time enforcement"
+              ]
+            },
+            "advanced": {
+              "level": "advanced",
+              "name": "Advanced",
+              "description": "Enforcement tied to tags or app identity",
+              "indicators": [
+                "Identity-aware policy enforcement",
+                "Partial automation via APIs",
+                "Real-time control at gateways"
+              ]
+            },
+            "optimal": {
+              "level": "optimal",
+              "name": "Optimal",
+              "description": "Fully automated, identity-driven enforcement",
+              "indicators": [
+                "Policy automatically follows workload identity",
+                "Inline enforcement across all paths",
+                "Telemetry-driven policy optimization"
+              ]
+            }
+          }
+        },
+        "visibility": {
+          "id": "visibility",
+          "name": "Network Visibility",
+          "description": "Observability into network traffic and connections",
+          "maturityLevels": {
+            "traditional": {
+              "level": "traditional",
+              "name": "Traditional",
+              "description": "Limited or no visibility into cloud traffic",
+              "indicators": [
+                "No workload-level visibility",
+                "Blind spots between cloud environments",
+                "Reactive troubleshooting only"
+              ]
+            },
+            "initial": {
+              "level": "initial",
+              "name": "Initial",
+              "description": "Basic flow logs and monitoring",
+              "indicators": [
+                "VPC flow logs enabled",
+                "Fragmented observability",
+                "Manual correlation required"
+              ]
+            },
+            "advanced": {
+              "level": "advanced",
+              "name": "Advanced",
+              "description": "Comprehensive visibility with centralized collection",
+              "indicators": [
+                "Visibility into data flows across zones",
+                "Centralized logging and telemetry",
+                "Audit trails begin to form"
+              ]
+            },
+            "optimal": {
+              "level": "optimal",
+              "name": "Optimal",
+              "description": "End-to-end encryption visibility with full telemetry",
+              "indicators": [
+                "Complete visibility into encrypted traffic",
+                "Real-time behavioral analysis",
+                "Audit-ready telemetry and provenance"
+              ]
+            }
+          }
+        },
+        "encryption": {
+          "id": "encryption",
+          "name": "Traffic Encryption",
+          "description": "Encryption of network traffic between workloads",
+          "maturityLevels": {
+            "traditional": {
+              "level": "traditional",
+              "name": "Traditional",
+              "description": "Inconsistent or no encryption",
+              "indicators": [
+                "Encryption only at perimeter",
+                "East-west traffic unencrypted",
+                "No consistent encryption policy"
+              ]
+            },
+            "initial": {
+              "level": "initial",
+              "name": "Initial",
+              "description": "Basic encryption enabled",
+              "indicators": [
+                "TLS for external connections",
+                "Selective internal encryption",
+                "Manual certificate management"
+              ]
+            },
+            "advanced": {
+              "level": "advanced",
+              "name": "Advanced",
+              "description": "Consistent encryption across zones",
+              "indicators": [
+                "Encryption for most sensitive paths",
+                "Automated certificate lifecycle",
+                "mTLS for critical services"
+              ]
+            },
+            "optimal": {
+              "level": "optimal",
+              "name": "Optimal",
+              "description": "End-to-end encryption across all paths",
+              "indicators": [
+                "Universal mTLS enforcement",
+                "Encrypted hybrid and multi-cloud paths",
+                "Full visibility into encrypted traffic"
+              ]
+            }
+          }
+        },
+        "multiCloudConnectivity": {
+          "id": "multiCloudConnectivity",
+          "name": "Multi-Cloud Connectivity",
+          "description": "Connectivity and security across multiple cloud providers",
+          "maturityLevels": {
+            "traditional": {
+              "level": "traditional",
+              "name": "Traditional",
+              "description": "Isolated cloud environments",
+              "indicators": [
+                "No cross-cloud connectivity",
+                "Each cloud operates in silo",
+                "Hairpin through on-premises for inter-cloud"
+              ]
+            },
+            "initial": {
+              "level": "initial",
+              "name": "Initial",
+              "description": "Basic VPN or direct connect",
+              "indicators": [
+                "Point-to-point VPN connections",
+                "Limited cross-cloud traffic",
+                "Inconsistent security policies"
+              ]
+            },
+            "advanced": {
+              "level": "advanced",
+              "name": "Advanced",
+              "description": "Multi-cloud transit with consistent policy",
+              "indicators": [
+                "Transit gateway or equivalent",
+                "Policy follows workloads across clouds",
+                "Automated failover capabilities"
+              ]
+            },
+            "optimal": {
+              "level": "optimal",
+              "name": "Optimal",
+              "description": "Unified multi-cloud fabric",
+              "indicators": [
+                "Single control plane for all clouds",
+                "Consistent Zero Trust policy everywhere",
+                "Full encryption and visibility across clouds"
+              ]
+            }
+          }
+        },
+        "hybridConnectivity": {
+          "id": "hybridConnectivity",
+          "name": "Hybrid Connectivity",
+          "description": "Connectivity between cloud and on-premises environments",
+          "maturityLevels": {
+            "traditional": {
+              "level": "traditional",
+              "name": "Traditional",
+              "description": "Basic VPN with broad access",
+              "indicators": [
+                "Site-to-site VPN only",
+                "Flat network extending to cloud",
+                "No segmentation at edge"
+              ]
+            },
+            "initial": {
+              "level": "initial",
+              "name": "Initial",
+              "description": "Direct connect with some segmentation",
+              "indicators": [
+                "Dedicated private connectivity",
+                "Basic network segmentation",
+                "Limited encryption on private links"
+              ]
+            },
+            "advanced": {
+              "level": "advanced",
+              "name": "Advanced",
+              "description": "Secure hybrid architecture with policy consistency",
+              "indicators": [
+                "Encrypted hybrid connections",
+                "Policy extends to on-premises",
+                "Active/active resilience"
+              ]
+            },
+            "optimal": {
+              "level": "optimal",
+              "name": "Optimal",
+              "description": "Unified Zero Trust fabric across hybrid environment",
+              "indicators": [
+                "Seamless policy across hybrid paths",
+                "Full encryption and microsegmentation",
+                "Single pane of glass for visibility"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "applicationsWorkloads": {
+      "id": "applicationsWorkloads",
+      "name": "Applications & Workloads",
+      "description": "Application-layer security and workload protection",
+      "icon": "🚀",
+      "cloudSpecific": false,
+      "dimensions": {
+        "workloadIdentity": {
+          "id": "workloadIdentity",
+          "name": "Workload Identity",
+          "description": "How applications and services are identified and authenticated",
+          "maturityLevels": {
+            "traditional": {
+              "level": "traditional",
+              "name": "Traditional",
+              "description": "Access is perimeter-based",
+              "indicators": [
+                "No workload-level visibility or control",
+                "IP-based access controls only",
+                "Shared credentials or service accounts"
+              ]
+            },
+            "initial": {
+              "level": "initial",
+              "name": "Initial",
+              "description": "Policies applied to app tiers or environments",
+              "indicators": [
+                "Basic service accounts per application",
+                "No real-time or identity-aware enforcement",
+                "Limited use of cloud IAM"
+              ]
+            },
+            "advanced": {
+              "level": "advanced",
+              "name": "Advanced",
+              "description": "Enforcement tied to tags or app identity",
+              "indicators": [
+                "Workload identities assigned via tags or labels",
+                "Some real-time control via gateways or APIs",
+                "Service mesh or API gateway in use"
+              ]
+            },
+            "optimal": {
+              "level": "optimal",
+              "name": "Optimal",
+              "description": "Identity-aware, runtime segmentation",
+              "indicators": [
+                "Cryptographic workload identity (mTLS, SPIFFE)",
+                "Automated policy control based on identity",
+                "Behavioral visibility and anomaly detection"
+              ]
+            }
+          }
+        },
+        "applicationSegmentation": {
+          "id": "applicationSegmentation",
+          "name": "Application Segmentation",
+          "description": "Segmentation and isolation between applications and services",
+          "maturityLevels": {
+            "traditional": {
+              "level": "traditional",
+              "name": "Traditional",
+              "description": "No application-level segmentation",
+              "indicators": [
+                "Applications can communicate freely",
+                "Tier-based access only",
+                "No service-to-service controls"
+              ]
+            },
+            "initial": {
+              "level": "initial",
+              "name": "Initial",
+              "description": "Basic service-level segmentation",
+              "indicators": [
+                "Security groups per service",
+                "Application tier isolation",
+                "Manual policy management"
+              ]
+            },
+            "advanced": {
+              "level": "advanced",
+              "name": "Advanced",
+              "description": "Dynamic application segmentation",
+              "indicators": [
+                "Service mesh or similar solution",
+                "Policy follows application across environments",
+                "API-level access controls"
+              ]
+            },
+            "optimal": {
+              "level": "optimal",
+              "name": "Optimal",
+              "description": "Microsegmentation at workload level",
+              "indicators": [
+                "Zero Trust between every service",
+                "Automated policy based on service identity",
+                "Runtime security and threat detection"
+              ]
+            }
+          }
+        },
+        "apiSecurity": {
+          "id": "apiSecurity",
+          "name": "API Security",
+          "description": "Security controls for APIs and service-to-service communication",
+          "maturityLevels": {
+            "traditional": {
+              "level": "traditional",
+              "name": "Traditional",
+              "description": "No API-level security controls",
+              "indicators": [
+                "APIs exposed without authentication",
+                "No rate limiting or throttling",
+                "Limited logging of API calls"
+              ]
+            },
+            "initial": {
+              "level": "initial",
+              "name": "Initial",
+              "description": "Basic API authentication",
+              "indicators": [
+                "API keys or basic auth",
+                "Some rate limiting",
+                "Inconsistent across services"
+              ]
+            },
+            "advanced": {
+              "level": "advanced",
+              "name": "Advanced",
+              "description": "API gateway with policy enforcement",
+              "indicators": [
+                "OAuth 2.0 or similar",
+                "Centralized API gateway",
+                "API-level monitoring and logging"
+              ]
+            },
+            "optimal": {
+              "level": "optimal",
+              "name": "Optimal",
+              "description": "Zero Trust API security with behavioral analysis",
+              "indicators": [
+                "mTLS for all service-to-service communication",
+                "Automated threat detection",
+                "Full API visibility and audit trail"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "data": {
+      "id": "data",
+      "name": "Data",
+      "description": "Data security, encryption, and governance",
+      "icon": "🔒",
+      "cloudSpecific": false,
+      "dimensions": {
+        "dataEncryption": {
+          "id": "dataEncryption",
+          "name": "Data Encryption",
+          "description": "Encryption of data at rest and in transit",
+          "maturityLevels": {
+            "traditional": {
+              "level": "traditional",
+              "name": "Traditional",
+              "description": "Encryption is inconsistent",
+              "indicators": [
+                "No standard encryption policy",
+                "Minimal key lifecycle management",
+                "Encryption gaps across environments"
+              ]
+            },
+            "initial": {
+              "level": "initial",
+              "name": "Initial",
+              "description": "Centralized key management begins",
+              "indicators": [
+                "Encryption is applied but lacks visibility",
+                "Basic key management service (KMS) in use",
+                "No audit readiness"
+              ]
+            },
+            "advanced": {
+              "level": "advanced",
+              "name": "Advanced",
+              "description": "Consistent encryption across zones",
+              "indicators": [
+                "Encryption for data at rest and in transit",
+                "Visibility into data flows improves",
+                "Audit trails begin to form"
+              ]
+            },
+            "optimal": {
+              "level": "optimal",
+              "name": "Optimal",
+              "description": "End-to-end encryption visibility",
+              "indicators": [
+                "Universal encryption with full visibility",
+                "Automated key rotation and management",
+                "Audit-ready and provable Zero Trust"
+              ]
+            }
+          }
+        },
+        "dataGovernance": {
+          "id": "dataGovernance",
+          "name": "Data Governance",
+          "description": "Policies and controls for data access and usage",
+          "maturityLevels": {
+            "traditional": {
+              "level": "traditional",
+              "name": "Traditional",
+              "description": "No data flow governance",
+              "indicators": [
+                "No visibility into data movement",
+                "No classification or labeling",
+                "No data loss prevention (DLP)"
+              ]
+            },
+            "initial": {
+              "level": "initial",
+              "name": "Initial",
+              "description": "Basic data classification begins",
+              "indicators": [
+                "Initial data classification",
+                "Manual data access reviews",
+                "Limited data lineage tracking"
+              ]
+            },
+            "advanced": {
+              "level": "advanced",
+              "name": "Advanced",
+              "description": "Automated data governance",
+              "indicators": [
+                "Automated data discovery and classification",
+                "Policy-based access controls",
+                "Data lineage and provenance tracking"
+              ]
+            },
+            "optimal": {
+              "level": "optimal",
+              "name": "Optimal",
+              "description": "Automated, telemetry-driven data governance",
+              "indicators": [
+                "Real-time data flow visibility",
+                "Automated policy enforcement",
+                "Complete audit trail for compliance"
+              ]
+            }
+          }
+        },
+        "dataAccess": {
+          "id": "dataAccess",
+          "name": "Data Access Controls",
+          "description": "Controls for who and what can access sensitive data",
+          "maturityLevels": {
+            "traditional": {
+              "level": "traditional",
+              "name": "Traditional",
+              "description": "Broad data access",
+              "indicators": [
+                "Minimal access controls",
+                "Shared accounts for data access",
+                "No principle of least privilege"
+              ]
+            },
+            "initial": {
+              "level": "initial",
+              "name": "Initial",
+              "description": "Role-based access control (RBAC)",
+              "indicators": [
+                "RBAC implemented",
+                "Basic access logging",
+                "Manual access reviews"
+              ]
+            },
+            "advanced": {
+              "level": "advanced",
+              "name": "Advanced",
+              "description": "Attribute-based access control (ABAC)",
+              "indicators": [
+                "Context-aware access decisions",
+                "Automated access certifications",
+                "Privileged access management (PAM)"
+              ]
+            },
+            "optimal": {
+              "level": "optimal",
+              "name": "Optimal",
+              "description": "Zero Trust data access",
+              "indicators": [
+                "Just-in-time access provisioning",
+                "Continuous authorization",
+                "Full audit trail with behavioral analysis"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "crossCutting": {
+      "id": "crossCutting",
+      "name": "Cross-Cutting Capabilities",
+      "description": "Operational capabilities that span all pillars",
+      "icon": "🔗",
+      "cloudSpecific": false,
+      "dimensions": {
+        "automation": {
+          "id": "automation",
+          "name": "Automation & Orchestration",
+          "description": "Infrastructure-as-code and automated workflows",
+          "maturityLevels": {
+            "traditional": {
+              "level": "traditional",
+              "name": "Traditional",
+              "description": "Manual, siloed operations",
+              "indicators": [
+                "Manual configuration and changes",
+                "No automation or telemetry",
+                "Security, platform, and network teams operate independently"
+              ]
+            },
+            "initial": {
+              "level": "initial",
+              "name": "Initial",
+              "description": "IaC adoption starts",
+              "indicators": [
+                "Basic infrastructure-as-code (IaC)",
+                "Observability is fragmented",
+                "Enforcement and visibility are disconnected"
+              ]
+            },
+            "advanced": {
+              "level": "advanced",
+              "name": "Advanced",
+              "description": "IaC integrated with policy APIs",
+              "indicators": [
+                "IaC integrated with security policy",
+                "SIEM and orchestrators partially connected",
+                "Cross-team workflows emerge"
+              ]
+            },
+            "optimal": {
+              "level": "optimal",
+              "name": "Optimal",
+              "description": "Unified platform with automated policy",
+              "indicators": [
+                "Full integration with CI/CD, SIEM, and orchestrators",
+                "Automated policy enforcement",
+                "Shared Zero Trust control fabric across all teams"
+              ]
+            }
+          }
+        },
+        "observability": {
+          "id": "observability",
+          "name": "Observability & Telemetry",
+          "description": "Monitoring, logging, and telemetry across the environment",
+          "maturityLevels": {
+            "traditional": {
+              "level": "traditional",
+              "name": "Traditional",
+              "description": "No automation or telemetry",
+              "indicators": [
+                "Manual log collection",
+                "No centralized monitoring",
+                "Reactive incident response"
+              ]
+            },
+            "initial": {
+              "level": "initial",
+              "name": "Initial",
+              "description": "Observability is fragmented",
+              "indicators": [
+                "Multiple monitoring tools",
+                "Siloed logs and metrics",
+                "Limited correlation capabilities"
+              ]
+            },
+            "advanced": {
+              "level": "advanced",
+              "name": "Advanced",
+              "description": "SIEM and orchestrators partially connected",
+              "indicators": [
+                "Centralized SIEM platform",
+                "Automated alerting and correlation",
+                "Security orchestration beginning"
+              ]
+            },
+            "optimal": {
+              "level": "optimal",
+              "name": "Optimal",
+              "description": "Full integration with telemetry and enforcement",
+              "indicators": [
+                "Real-time telemetry across all pillars",
+                "Automated threat detection and response",
+                "Complete audit trail for compliance"
+              ]
+            }
+          }
+        },
+        "teamCollaboration": {
+          "id": "teamCollaboration",
+          "name": "Team Collaboration",
+          "description": "How security, platform, and network teams work together",
+          "maturityLevels": {
+            "traditional": {
+              "level": "traditional",
+              "name": "Traditional",
+              "description": "Security, platform, and network teams operate independently",
+              "indicators": [
+                "Siloed teams with separate tools",
+                "Manual handoffs and coordination",
+                "Conflicting priorities"
+              ]
+            },
+            "initial": {
+              "level": "initial",
+              "name": "Initial",
+              "description": "Enforcement and visibility are disconnected",
+              "indicators": [
+                "Some shared tooling",
+                "Regular sync meetings",
+                "Still largely reactive"
+              ]
+            },
+            "advanced": {
+              "level": "advanced",
+              "name": "Advanced",
+              "description": "Cross-team workflows emerge",
+              "indicators": [
+                "Shared dashboards and runbooks",
+                "Collaborative incident response",
+                "DevSecOps practices emerging"
+              ]
+            },
+            "optimal": {
+              "level": "optimal",
+              "name": "Optimal",
+              "description": "Shared Zero Trust control fabric across all teams",
+              "indicators": [
+                "Single source of truth for security posture",
+                "Automated workflows across teams",
+                "Unified platform and shared responsibility model"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
