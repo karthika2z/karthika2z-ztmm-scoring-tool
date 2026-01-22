@@ -31,9 +31,11 @@ export function TopNavigation({ onLoad, onSave, onToggleMobileMenu }: TopNavigat
 
           {/* Logo + Title (responsive) */}
           <div className="flex items-center space-x-3 min-w-0">
-            <div className="w-8 h-8 md:w-10 md:h-10 bg-aviatrix-orange rounded flex items-center justify-center flex-shrink-0">
-              <span className="text-white font-bold text-lg md:text-xl">A</span>
-            </div>
+            <img
+              src="/aviatrix.png"
+              alt="Aviatrix Logo"
+              className="w-8 h-8 md:w-10 md:h-10 object-contain flex-shrink-0"
+            />
             <div className="min-w-0">
               <h1 className="text-sm md:text-lg font-heading font-bold text-gray-900 truncate">
                 {state.assessment.metadata.customerName || 'New Assessment'}
