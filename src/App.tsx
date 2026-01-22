@@ -18,20 +18,73 @@ function AppContent() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [notification, setNotification] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
-  // Auto-save on beforeunload
+  // Auto-download and save on window close/navigation
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
       if (state.ui.isDirty) {
-        // Note: async operations in beforeunload are unreliable
-        // We'll just show the warning, actual save happens on user action
+        // Auto-download JSON backup before closing
+        try {
+          const json = JSON.stringify(state.assessment, null, 2);
+          const blob = new Blob([json], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+
+          const timestamp = new Date().toISOString().replace(/:/g, '-').split('.')[0];
+          const customerName = state.assessment.metadata.customerName || 'Unnamed_Customer';
+          const filename = `${customerName}_backup_${timestamp}.json`;
+
+          // Create hidden link and trigger download
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = filename;
+          link.style.display = 'none';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+        } catch (error) {
+          console.error('Failed to auto-download backup:', error);
+        }
+
+        // Show browser warning
         e.preventDefault();
         e.returnValue = '';
       }
     };
 
+    const handleUnload = () => {
+      // Final save to localStorage before page unloads
+      if (state.ui.isDirty) {
+        try {
+          localStorage.setItem('ztmm-assessment', JSON.stringify(state.assessment));
+          localStorage.setItem('ztmm-assessment-timestamp', new Date().toISOString());
+        } catch (error) {
+          console.error('Failed to save on unload:', error);
+        }
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      // Save to localStorage when user switches tabs or minimizes window
+      if (document.hidden && state.ui.isDirty) {
+        try {
+          localStorage.setItem('ztmm-assessment', JSON.stringify(state.assessment));
+          localStorage.setItem('ztmm-assessment-timestamp', new Date().toISOString());
+        } catch (error) {
+          console.error('Failed to save on visibility change:', error);
+        }
+      }
+    };
+
     window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
-  }, [state.ui.isDirty]);
+    window.addEventListener('unload', handleUnload);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('unload', handleUnload);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [state.ui.isDirty, state.assessment]);
 
   const showNotification = (message: string, type: 'success' | 'error') => {
     setNotification({ message, type });

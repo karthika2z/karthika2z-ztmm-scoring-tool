@@ -238,27 +238,28 @@ const AssessmentContext = createContext<AssessmentContextType | undefined>(undef
 export function AssessmentProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(assessmentReducer, initialState);
 
-  // Save to sessionStorage on state change
+  // Save to localStorage on state change (persists across browser sessions)
   useEffect(() => {
     if (state.assessment.assessmentId) {
       try {
-        sessionStorage.setItem('ztmm-assessment', JSON.stringify(state.assessment));
+        localStorage.setItem('ztmm-assessment', JSON.stringify(state.assessment));
+        localStorage.setItem('ztmm-assessment-timestamp', new Date().toISOString());
       } catch (error) {
-        console.error('Failed to save to sessionStorage:', error);
+        console.error('Failed to save to localStorage:', error);
       }
     }
   }, [state.assessment]);
 
-  // Load from sessionStorage on mount
+  // Load from localStorage on mount
   useEffect(() => {
     try {
-      const saved = sessionStorage.getItem('ztmm-assessment');
+      const saved = localStorage.getItem('ztmm-assessment');
       if (saved) {
         const assessment = JSON.parse(saved) as AssessmentData;
         dispatch({ type: 'LOAD_ASSESSMENT', payload: assessment });
       }
     } catch (error) {
-      console.error('Failed to load from sessionStorage:', error);
+      console.error('Failed to load from localStorage:', error);
     }
   }, []);
 
